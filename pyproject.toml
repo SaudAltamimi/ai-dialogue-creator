@@ -1,0 +1,33 @@
+[project]
+name = "ai-agents-lab"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic-ai[logfire]>=0.0.24",
+    "python-dotenv>=1.0.1",
+    "pyyaml>=6.0.2",
+    "chainlit>=2.2.1",
+    "pandas>=2.2.3",
+    "openpyxl>=3.1.5",
+    "markitdown>=0.0.1a4",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.logfire]
+ignore_no_config = true
+
+[tool.poetry]
+name = "ai-agents-lab"
+version = "0.1.0"
+description = "AI Agents Lab"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.0"
+pydantic-ai = "^0.1.0"
+python-dotenv = "^1.0.0"
