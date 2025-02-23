@@ -4,7 +4,7 @@ from markitdown import MarkItDown
 from pathlib import Path
 from pydantic_ai.models.groq import GroqModelSettings
 
-# Example usage of the intent classifier agent
+
 async def main():
     # Create data/pdfs directory if it doesn't exist
     pdf_dir = Path('data/pdfs')
@@ -26,25 +26,25 @@ async def main():
     # Example message to classify
     user_message = f"The content of the file is: {file_cmd.text_content}"
     
-    # Call the intent classifier agent
-    result = await podcast_planner_agent.run(user_message, model_settings=GroqModelSettings(temperature=0.2))
+    # Call the dialogue creator agent
+    result = await dialogue_creator_agent.run(user_message, model_settings=GroqModelSettings(temperature=0.2))
     
     # Save the output to a markdown file
     output_path = Path('data/output.md')
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
     # Convert to markdown format and write to file
-    markdown_content = f"# Podcast Plan\n\n```json\n{result.data.model_dump_json(indent=4)}\n```"
+    markdown_content = f"# Dialogue\n\n```json\n{result.data.model_dump_json(indent=4)}\n```"
     print(markdown_content)
     output_path.write_text(markdown_content)
-    print(f"Saved podcast plan to {output_path}")
+    print(f"Saved dialogue to {output_path}")
 
     # Create DialogueToSpeech instance
     dialogue_to_speech = DialogueToSpeech()
     
     # Generate podcast audio, Combine podcast parts into a single file
     combined_podcast_path = dialogue_to_speech.combine_podcast_parts(result.data)
-    print(f"Combined podcast saved to: {combined_podcast_path}")
+    print(f"Combined dialogue saved to: {combined_podcast_path}")
 
 if __name__ == "__main__":
     import asyncio
