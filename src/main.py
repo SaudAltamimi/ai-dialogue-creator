@@ -1,4 +1,4 @@
-from agents.dialogue_creator.dialogue_creator_agent import dialogue_creator_agent
+from agents.dialogue_creator.dialogue_creator_agent import podcast_planner_agent
 from agents.dialogue_creator.tts_utils import DialogueToSpeech
 from markitdown import MarkItDown
 from pathlib import Path
@@ -27,7 +27,7 @@ async def main():
     user_message = f"The content of the file is: {file_cmd.text_content}"
     
     # Call the dialogue creator agent
-    result = await dialogue_creator_agent.run(user_message, model_settings=GroqModelSettings(temperature=0.2))
+    result = await podcast_planner_agent.run(user_message, model_settings=GroqModelSettings(temperature=0.2))
     
     # Save the output to a markdown file
     output_path = Path('data/output.md')

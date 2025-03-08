@@ -12,7 +12,7 @@ from pydantic_ai.models.openai import OpenAIModel
 from pydantic import BaseModel, Field
 from typing import List, Literal
 from dataclasses import dataclass
-from groq import Client as GroqClient
+from groq import AsyncClient as GroqClient
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -38,6 +38,7 @@ class PodcastPart(BaseModel):
             "Be natural and not scripted."
             "Add pauses, breaks, and other natural human behaviors to make it more engaging."
             "Be funny and interesting."
+            "Make sure you do not end on a question."
         ),
         min_length=5
     )
@@ -50,13 +51,13 @@ class Podcast(BaseModel):
 
 # Create a PydanticAI instance
 # TODO: Change the model to a better one that can handle the structured output
-# _model_name = "llama-3.3-70b-versatile"
-# _model = GroqModel(
-#     _model_name, 
-#     # groq_client=GroqClient(base_url="https://api.me-central-1.groqcloud.com"),
-# )
+_model_name = "llama-3.3-70b-versatile"
+_model = GroqModel(
+    _model_name,
+    groq_client=GroqClient(base_url="https://api.me-central-1.groqcloud.com"),
+)
 
-_model = OpenAIModel("gpt-4o") # Best model so far for structured output
+# _model = OpenAIModel("gpt-4o") # Best model so far for structured output
 podcast_planner_agent = Agent(
     _model,
     system_prompt=("You are a model that creates a dialogue from a content of a file for the purpose of explaining and discussing the content in an engaging way."),
